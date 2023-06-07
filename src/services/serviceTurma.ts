@@ -29,7 +29,8 @@ type findOneTurmaRequest = {
 // 3) Funções CRUD
 
 export class TurmaService {
-    async create({
+    
+  async create({
     fk_curso,
     data_inicio,
     data_fim,
@@ -40,7 +41,6 @@ export class TurmaService {
     }
 
     const turma = cursor.create({
-        id_turma,
         data_inicio,
         data_fim,
         horas_aula_dia,
@@ -90,19 +90,6 @@ export class TurmaService {
     turma.horas_aula_dia = horas_aula_dia ? horas_aula_dia : turma.horas_aula_dia
 }
 
-async readAll() {
-    const turma = await cursor.find()
-    return turma
-}
-
-async readOne({ id_turma }: findOneTurmaRequest): Promise<Turma | Error> {
-    const turma = await cursor.findOne({ where: { id_turma } })
-    if (!turma) {
-    return new Error("Turma não encontrado!")
-    }
-    return turma
-}
-
   async delete({ id_turma }: findOneTurmaRequest): Promise<Turma | Error> {
     const turma = await cursor.findOne({ where: { id_turma } })
     if (!turma) {
@@ -111,7 +98,5 @@ async readOne({ id_turma }: findOneTurmaRequest): Promise<Turma | Error> {
     await cursor.delete(turma.id_turma)
     return turma
   }
-}
-
 }
 

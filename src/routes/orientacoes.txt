@@ -1,1 +1,0 @@
-Os arquivos de rota irão guardar as rotas HTTP para cada entidade.

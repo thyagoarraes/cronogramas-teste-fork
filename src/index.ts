@@ -1,4 +1,6 @@
 import { AppDataSource } from "./databases/connections/data-source"
+import rotas from "./routes/routes"
+
 AppDataSource.initialize()
 import rotas from "./routes/routes"
 
