@@ -37,3 +37,9 @@ ALTER TABLE "unidade" ADD FOREIGN KEY ("fk_curso") REFERENCES "curso" ("id_curso
 ALTER TABLE "aula" ADD FOREIGN KEY ("fk_turma") REFERENCES "turma" ("id_turma");
 
 ALTER TABLE "aula" ADD FOREIGN KEY ("fk_unidade") REFERENCES "unidade" ("id_unidade");
+
+CREATE TABLE "recesso" (
+  "id_recesso" varchar PRIMARY KEY,
+  "descricao_recesso" varchar NOT NULL,
+  "data_recesso" date NOT NULL
+);

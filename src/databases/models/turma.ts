@@ -12,13 +12,13 @@ export default class Turma {
   fk_curso: string
 
   // Atributos
-  @Column({ nullable: true })
+  @Column()
   data_inicio: Date
 
   @Column({ nullable: true })
   data_fim: Date
 
-  @Column({ nullable: true })
+  @Column()
   horas_aula_dia: Number
 
   constructor() {

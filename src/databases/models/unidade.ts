@@ -12,13 +12,13 @@ export default class Unidade {
   fk_curso: string
 
   //atributos
-  @Column({ nullable: true })
+  @Column()
   descricao_unidade: string
 
-  @Column({ nullable: true })
+  @Column()
   carga_horaria_unidade: number
 
-  @Column({ nullable: true })
+  @Column()
   ordem: number
 
   constructor() {

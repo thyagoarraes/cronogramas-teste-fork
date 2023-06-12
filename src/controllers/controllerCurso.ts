@@ -18,15 +18,15 @@ export default class CursoController {
     if (result instanceof Error) {
       return response.status(400).json(result.message)
     }
-    return response.json(result)
+    return response.status(200).json(result)
   }
 
-  async readAll(response: Response) {
+  async readAll(request: Request, response: Response) {
     const result = await service.readAll()
     if (result.length < 1) {
-      return response.json("Nenhum curso cadastrado!")
+      return response.status(400).json("Nenhum curso cadastrado!")
     }
-    return response.json(result)
+    return response.status(200).json(result)
   }
 
   async readOne(request: Request, response: Response) {

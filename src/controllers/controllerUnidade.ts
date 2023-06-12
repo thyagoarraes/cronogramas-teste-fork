@@ -21,10 +21,10 @@ export default class UnidadeController {
     return response.json(result)
   }
 
-  async readAll(response: Response) {
+  async readAll(request: Request, response: Response) {
     const result = await service.readAll()
     if (result.length < 1) {
-      return response.json("Nenhuma unidade cadastrado!")
+      return response.json("Nenhuma unidade cadastrada!")
     }
     return response.json(result)
   }

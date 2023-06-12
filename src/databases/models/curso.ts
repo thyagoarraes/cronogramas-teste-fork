@@ -8,13 +8,13 @@ export default class Curso {
   id_curso: string
 
   //atributos
-  @Column({ nullable: true })
+  @Column()
   descricao_curso: string
 
-  @Column({ nullable: true })
+  @Column()
   carga_horaria_curso: number
 
-  @Column({ nullable: true })
+  @Column()
   modalidade: string
 
   @Column()

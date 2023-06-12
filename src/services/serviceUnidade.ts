@@ -61,7 +61,7 @@ export class UnidadeService {
   }: findOneUnidadeRequest): Promise<Unidade | Error> {
     const unidade = await cursor.findOne({ where: { id_unidade } })
     if (!unidade) {
-      return new Error("Curso não encontrado!")
+      return new Error("Unidade não encontrada!")
     }
     return unidade
   }
@@ -75,7 +75,7 @@ export class UnidadeService {
   }: updateUnidadeRequest): Promise<Unidade | Error> {
     const unidade = await cursor.findOne({ where: { id_unidade } })
     if (!unidade) {
-      return new Error("Cliente não encontrado!")
+      return new Error("Unidade não encontrada!")
     }
 
     unidade.descricao_unidade = descricao_unidade
