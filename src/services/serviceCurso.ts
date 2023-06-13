@@ -1,4 +1,3 @@
-import { Like } from "typeorm"
 import { AppDataSource } from "../databases/connections/datasourceDev"
 import Curso from "../databases/models/curso"
 
@@ -27,11 +26,11 @@ type findOneCursoRequest = {
   id_curso: string
 }
 
-type findOneFilterRequest = {
+type findCursoByEixoRequest = {
   eixo: string
 }
 
-type findOneFilterModRequest = {
+type findCursoByModalidadeRequest = {
   modalidade: string
 }
 
@@ -73,20 +72,24 @@ export class CursoService {
     return curso
   }
 
-  async readOneFilter({ eixo }: findOneFilterRequest) {
-    const curso = await cursor.find({ where: { eixo }})
-    if (!curso) {
-      return new Error ("Eixo não encontrado!")
+  async readByEixo({
+    eixo,
+  }: findCursoByEixoRequest): Promise<Array<Curso> | Error> {
+    const cursos = await cursor.find({ where: { eixo } })
+    if (!cursos || cursos.length < 1) {
+      return new Error("Não foram encontrados cursos neste eixo!")
     }
-    return curso
+    return cursos
   }
 
-  async readOneFilterModalidade({ modalidade }: findOneFilterModRequest) {
-    const curso = await cursor.find({ where: { modalidade }})
-    if (!curso) {
-      return new Error ("Modalidade não encontrada!")
+  async readByModalidade({
+    modalidade,
+  }: findCursoByModalidadeRequest): Promise<Array<Curso> | Error> {
+    const cursos = await cursor.find({ where: { modalidade } })
+    if (!cursos || cursos.length < 1) {
+      return new Error("Não foram encontrados cursos nesta modalidade!")
     }
-    return curso
+    return cursos
   }
 
   async update({
@@ -98,7 +101,7 @@ export class CursoService {
   }: updateCursoRequest): Promise<Curso | Error> {
     const curso = await cursor.findOne({ where: { id_curso } })
     if (!curso) {
-      return new Error("Cliente não encontrado!")
+      return new Error("Curso não encontrado!")
     }
 
     curso.descricao_curso = descricao_curso

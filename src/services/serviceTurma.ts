@@ -27,8 +27,8 @@ type findOneTurmaRequest = {
   id_turma: string
 }
 
-type findOneFilterRequest = {
-  turno:string
+type findTurmaByTurnoRequest = {
+  turno: string
 }
 
 // 3) Funções CRUD
@@ -57,8 +57,8 @@ export class TurmaService {
   }
 
   async readAll() {
-    const turma = await cursor.find()
-    return turma
+    const turmas = await cursor.find()
+    return turmas
   }
 
   async readOne({ id_turma }: findOneTurmaRequest): Promise<Turma | Error> {
@@ -69,12 +69,14 @@ export class TurmaService {
     return turma
   }
 
-  async FilterReadOne({ turno }: findOneFilterRequest) {
-    const curso = await cursor.find({ where: { turno }})
-    if (!curso) {
-      return new Error ("Turno não encontrado!")
+  async readByTurno({
+    turno,
+  }: findTurmaByTurnoRequest): Promise<Array<Turma> | Error> {
+    const turmas = await cursor.find({ where: { turno } })
+    if (!turmas || turmas.length < 1) {
+      return new Error("Não foram encontradas turmas neste turno!")
     }
-    return curso
+    return turmas
   }
 
   async update({
@@ -103,12 +105,12 @@ export class TurmaService {
     return turma
   }
 
-  async delete({ id_turma }: findOneTurmaRequest): Promise<Turma | Error> {
+  async delete({ id_turma }: findOneTurmaRequest): Promise<String | Error> {
     const turma = await cursor.findOne({ where: { id_turma } })
     if (!turma) {
       return new Error("Turma não encontrada!")
     }
     await cursor.delete(turma.id_turma)
-    return turma
+    return "Turma excluída com sucesso!"
   }
 }

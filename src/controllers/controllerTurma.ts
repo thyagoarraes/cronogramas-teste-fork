@@ -1,12 +1,11 @@
 import { Request, Response } from "express"
-import {TurmaService} from "../services/serviceTurma"
+import { TurmaService } from "../services/serviceTurma"
 
 const service = new TurmaService()
 
 export default class CursoController {
   async create(request: Request, response: Response) {
-    const {fk_curso, turno, data_inicio, horas_aula_dia } =
-      request.body
+    const { fk_curso, turno, data_inicio, horas_aula_dia } = request.body
 
     const result = await service.create({
       fk_curso,
@@ -16,7 +15,7 @@ export default class CursoController {
     })
 
     if (result instanceof Error) {
-      return response.status(400).json(result.message)
+      return response.status(404).json(result.message)
     }
     return response.json(result)
   }
@@ -38,10 +37,9 @@ export default class CursoController {
     return response.json(result)
   }
 
-
-  async readOneFiltro(request: Request, response: Response) {
+  async readByTurno(request: Request, response: Response) {
     const { turno } = request.params
-    const result = await service.readOneFiltro({ turno })
+    const result = await service.readByTurno({ turno })
     if (result instanceof Error) {
       return response.status(404).json(result.message)
     }
@@ -50,7 +48,7 @@ export default class CursoController {
 
   async update(request: Request, response: Response) {
     const { id_turma } = request.params
-    const { fk_curso, turno, data_inicio , data_fim , horas_aula_dia } =
+    const { fk_curso, turno, data_inicio, data_fim, horas_aula_dia } =
       request.body
     const result = await service.update({
       id_turma,
@@ -61,7 +59,7 @@ export default class CursoController {
       horas_aula_dia,
     })
     if (result instanceof Error) {
-      return response.status(400).json(result.message)
+      return response.status(404).json(result.message)
     }
     return response.json(result)
   }
@@ -70,9 +68,8 @@ export default class CursoController {
     const { id_turma } = request.params
     const result = await service.delete({ id_turma })
     if (result instanceof Error) {
-      return response.status(400).json(result.message)
+      return response.status(404).json(result.message)
     }
     return response.status(300).json(result)
   }
-  
 }

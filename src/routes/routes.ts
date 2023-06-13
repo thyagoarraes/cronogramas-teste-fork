@@ -8,7 +8,7 @@ import RecessoController from "../controllers/controllerRecesso"
 const rotas = Router()
 
 rotas.get("/", (request, response) => {
-    return response.json("home page")
+  return response.json("home page")
 })
 
 //Aula
@@ -21,8 +21,8 @@ rotas.delete("/aulas/:id_aula", new AulaController().delete)
 //Curso
 rotas.post("/cursos", new CursoController().create)
 rotas.get("/cursos", new CursoController().readAll)
-rotas.get("/cursos/eixo", new CursoController().readOneFilter)
-rotas.get("/cursos/modalidade", new CursoController().readOneFilterModalidade)
+rotas.get("/cursos/eixo", new CursoController().readByEixo)
+rotas.get("/cursos/modalidade", new CursoController().readByModalidade)
 rotas.get("/cursos/:id_curso", new CursoController().readOne)
 rotas.put("/cursos/:id_curso", new CursoController().update)
 rotas.delete("/cursos/:id_curso", new CursoController().delete)
@@ -30,21 +30,16 @@ rotas.delete("/cursos/:id_curso", new CursoController().delete)
 //Turma
 rotas.post("/turmas", new TurmaController().create)
 rotas.get("/turmas", new TurmaController().readAll)
-rotas.get("/turmas/turno", new TurmaController().FilterReadOne)
+rotas.get("/turmas/turno", new TurmaController().readByTurno)
 rotas.get("/turmas/:id_turma", new TurmaController().readOne)
-rotas.get("/turmas/:turno", new TurmaController().readOneFiltro)
 rotas.put("/turmas/:id_turma", new TurmaController().update)
 rotas.delete("/turmas/:id_turma", new TurmaController().delete)
 
 //Unidade
 rotas.post("/unidades", new UnidadeController().create)
 rotas.get("/unidades", new UnidadeController().readAll)
-rotas.get("/unidades/fk_curso", new UnidadeController().readOneFilter)
+rotas.get("/unidades/curso", new UnidadeController().readByCurso)
 rotas.get("/unidades/:id_unidade", new UnidadeController().readOne)
-rotas.get("/unidades/:fk_curso", new UnidadeController().readOneFiltro)
-rotas.put("/unidades/:id_unidade", new UnidadeController().update)
-rotas.delete("/unidades/:id_unidade", new UnidadeController().delete)
-
 //Recesso
 rotas.post("/recessos", new RecessoController().create)
 rotas.get("/recessos", new RecessoController().readAll)

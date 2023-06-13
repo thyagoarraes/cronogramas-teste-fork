@@ -38,15 +38,11 @@ export default class UnidadeController {
     return response.json(result)
   }
 
-  async readOneFilter(request: Request, response: Response) {
+  async readByCurso(request: Request, response: Response) {
     const { fk_curso } = request.params
-    const result = await service.readOneFilter({ fk_curso })
+    const result = await service.readByCurso({ fk_curso })
     if (result instanceof Error) {
       return response.status(418).json(result.message)
-    }
-    else {
-      if (result.length < 1) {
-        return response.status(418).json("Nenhuma unidade cadastrada!")
     }
     return response.json(result)
   }
@@ -72,7 +68,7 @@ export default class UnidadeController {
     const { id_unidade } = request.params
     const result = await service.delete({ id_unidade })
     if (result instanceof Error) {
-      return response.status(400).json(result.message)
+      return response.status(404).json(result.message)
     }
     return response.status(300).json(result)
   }

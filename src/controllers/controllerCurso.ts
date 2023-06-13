@@ -38,18 +38,18 @@ export default class CursoController {
     return response.json(result)
   }
 
-  async readOneFilter(request: Request, response: Response) {
+  async readByEixo(request: Request, response: Response) {
     const { eixo } = request.body
-    const result = await service.readOneFilter({ eixo })
+    const result = await service.readByEixo({ eixo })
     if (result instanceof Error) {
       return response.status(418).json(result.message)
     }
     return response.json(result)
   }
 
-  async readOneFilterModalidade(request: Request, response: Response) {
+  async readByModalidade(request: Request, response: Response) {
     const { modalidade } = request.body
-    const result = await service.readOneFilterModalidade({ modalidade })
+    const result = await service.readByModalidade({ modalidade })
     if (result instanceof Error) {
       return response.status(418).json(result.message)
     }
@@ -81,5 +81,4 @@ export default class CursoController {
     }
     return response.status(300).json(result)
   }
-
 }

@@ -26,6 +26,10 @@ type findOneAulaRequest = {
   id_aula: string
 }
 
+type findAulaByTurmaRequest = {
+  fk_turma: string
+}
+
 // 3) Funções CRUD
 
 export class AulaService {
@@ -62,6 +66,16 @@ export class AulaService {
       return new Error("Aula não encontrada!")
     }
     return aula
+  }
+
+  async readByTurma({
+    fk_turma,
+  }: findAulaByTurmaRequest): Promise<Array<Aula> | Error> {
+    const aulas = await cursor.find({ where: { fk_turma } })
+    if (!aulas || aulas.length < 1) {
+      return new Error("Aula não encontrada!")
+    }
+    return aulas
   }
 
   async update({
