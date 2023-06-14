@@ -1,4 +1,4 @@
-import { AppDataSource } from "../databases/connections/data-source"
+import { AppDataSource } from "../databases/connections/datasourceDev"
 import Curso from "../databases/models/curso"
 
 // 1) Estabelece conexão com a tabela alvo no banco de dados através de um cursor
@@ -24,6 +24,14 @@ type updateCursoRequest = {
 
 type findOneCursoRequest = {
   id_curso: string
+}
+
+type findCursoByEixoRequest = {
+  eixo: string
+}
+
+type findCursoByModalidadeRequest = {
+  modalidade: string
 }
 
 // 3) Funções CRUD
@@ -64,6 +72,26 @@ export class CursoService {
     return curso
   }
 
+  async readByEixo({
+    eixo,
+  }: findCursoByEixoRequest): Promise<Array<Curso> | Error> {
+    const cursos = await cursor.find({ where: { eixo } })
+    if (!cursos || cursos.length < 1) {
+      return new Error("Não foram encontrados cursos neste eixo!")
+    }
+    return cursos
+  }
+
+  async readByModalidade({
+    modalidade,
+  }: findCursoByModalidadeRequest): Promise<Array<Curso> | Error> {
+    const cursos = await cursor.find({ where: { modalidade } })
+    if (!cursos || cursos.length < 1) {
+      return new Error("Não foram encontrados cursos nesta modalidade!")
+    }
+    return cursos
+  }
+
   async update({
     id_curso,
     descricao_curso,
@@ -73,7 +101,7 @@ export class CursoService {
   }: updateCursoRequest): Promise<Curso | Error> {
     const curso = await cursor.findOne({ where: { id_curso } })
     if (!curso) {
-      return new Error("Cliente não encontrado!")
+      return new Error("Curso não encontrado!")
     }
 
     curso.descricao_curso = descricao_curso
@@ -98,5 +126,4 @@ export class CursoService {
     await cursor.delete(curso.id_curso)
     return "Curso excluído com sucesso!"
   }
-
 }

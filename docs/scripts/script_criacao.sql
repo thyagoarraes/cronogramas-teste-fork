@@ -16,9 +16,10 @@ CREATE TABLE "curso" (
 
 CREATE TABLE "turma" (
   "id_turma" varchar PRIMARY KEY,
+  "turno" varchar NOT NULL,
   "data_inicio" date NOT NULL,
   "data_fim" date,
-  "horas_aula_dia" integer NOT NULL DEFAULT 10,
+  "horas_aula_dia" integer NOT NULL,
   "fk_curso" varchar
 );
 
@@ -30,6 +31,12 @@ CREATE TABLE "aula" (
   "fk_unidade" varchar
 );
 
+CREATE TABLE "recesso" (
+  "id_recesso" varchar PRIMARY KEY,
+  "descricao_recesso" varchar NOT NULL,
+  "data_recesso" varchar NOT NULL
+);
+
 ALTER TABLE "turma" ADD FOREIGN KEY ("fk_curso") REFERENCES "curso" ("id_curso");
 
 ALTER TABLE "unidade" ADD FOREIGN KEY ("fk_curso") REFERENCES "curso" ("id_curso");
@@ -37,9 +44,3 @@ ALTER TABLE "unidade" ADD FOREIGN KEY ("fk_curso") REFERENCES "curso" ("id_curso
 ALTER TABLE "aula" ADD FOREIGN KEY ("fk_turma") REFERENCES "turma" ("id_turma");
 
 ALTER TABLE "aula" ADD FOREIGN KEY ("fk_unidade") REFERENCES "unidade" ("id_unidade");
-
-CREATE TABLE "recesso" (
-  "id_recesso" varchar PRIMARY KEY,
-  "descricao_recesso" varchar NOT NULL,
-  "data_recesso" date NOT NULL
-);

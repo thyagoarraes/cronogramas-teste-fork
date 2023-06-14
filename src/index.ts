@@ -1,4 +1,4 @@
-import { AppDataSource } from "./databases/connections/data-source"
+import { AppDataSource } from "./databases/connections/datasourceDev"
 import rotas from "./routes/routes"
 
 AppDataSource.initialize()

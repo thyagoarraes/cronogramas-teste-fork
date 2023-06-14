@@ -17,7 +17,6 @@ export default class RecessoController {
   }
 
   async readAll(request: Request, response: Response) {
-    console.log("Passei aqui")
     const result = await service.readAll()
     if (result.length < 1) {
       return response.json("Nenhum recesso cadastrado!")

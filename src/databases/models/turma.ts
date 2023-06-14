@@ -13,6 +13,9 @@ export default class Turma {
 
   // Atributos
   @Column()
+  turno: string
+
+  @Column()
   data_inicio: Date
 
   @Column({ nullable: true })
